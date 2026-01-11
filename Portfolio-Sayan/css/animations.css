@@ -1,0 +1,405 @@
+/* Animation Keyframes and Triggers */
+/* Background Animations */
+@keyframes backgroundShift {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  33% {
+    transform: scale(1.1) rotate(1deg);
+    opacity: 0.8;
+  }
+  66% {
+    transform: scale(0.9) rotate(-1deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background: linear-gradient(135deg, transparent 0%, rgba(99, 102, 241, 0.05) 50%, transparent 100%);
+  }
+  50% {
+    background: linear-gradient(225deg, transparent 0%, rgba(16, 185, 129, 0.05) 50%, transparent 100%);
+  }
+  100% {
+    background: linear-gradient(315deg, transparent 0%, rgba(245, 158, 11, 0.05) 50%, transparent 100%);
+  }
+}
+
+/* Floating Elements */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-30px) rotate(120deg);
+  }
+  66% {
+    transform: translateY(30px) rotate(240deg);
+  }
+}
+
+/* Enhanced Scroll-based Animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-80px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.8) rotate(-5deg);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scale-in.visible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Hero Animations */
+@keyframes heroGlow {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes underlineGlow {
+  0% {
+    box-shadow: 0 0 5px var(--primary);
+  }
+  100% {
+    box-shadow: 0 0 20px var(--primary);
+  }
+}
+
+/* Floating Card Animations */
+@keyframes floatEnhanced {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(-1deg);
+  }
+}
+
+/* Section Background Animations */
+@keyframes sectionGlow {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* Progress Bar Animations */
+@keyframes shimmerOnce {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Button Ripple Animation */
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Toast Animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Section Background Effects */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  animation: heroGlow 8s ease-in-out infinite alternate;
+}
+
+.about::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 70%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+  animation: sectionGlow 12s ease-in-out infinite alternate;
+}
+
+.skills::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: radial-gradient(circle at 70% 30%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+  animation: sectionGlow 15s ease-in-out infinite alternate;
+}
+
+.services::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+  animation: sectionGlow 18s ease-in-out infinite alternate;
+}
+
+.projects::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+  animation: sectionGlow 20s ease-in-out infinite alternate;
+}
+
+.education::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+  animation: sectionGlow 22s ease-in-out infinite alternate;
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 70% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+  animation: sectionGlow 25s ease-in-out infinite alternate;
+}
+
+/* Floating Element Initialization */
+.floating-element {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Animation Triggers */
+.hero .fade-in-up {
+  animation-delay: 0.2s;
+}
+
+.hero .fade-in-up:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.hero .fade-in-up:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+/* Stagger Animation for Multiple Elements */
+.skills-showcase .skill-category:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.skills-showcase .skill-category:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.skills-showcase .skill-category:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.services-grid .service-card:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.services-grid .service-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.services-grid .service-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.services-grid .service-card:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.projects-grid .project-card:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.projects-grid .project-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.projects-grid .project-card:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.contact-info .contact-card:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.contact-info .contact-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.contact-info .contact-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.contact-info .contact-card:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.contact-info .contact-card:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.certifications-grid .cert-card:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.certifications-grid .cert-card:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .floating-card {
+    animation: none;
+  }
+
+  .badge-dot {
+    animation: none;
+  }
+
+  .fade-in-up,
+  .fade-in-left,
+  .fade-in-right,
+  .scale-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  body::before,
+  body::after {
+    animation: none;
+  }
+
+  .floating-element {
+    animation: none;
+  }
+
+  .hero::before,
+  .about::before,
+  .skills::before,
+  .services::before,
+  .projects::before,
+  .education::before,
+  .contact::before {
+    animation: none;
+  }
+
+  .highlight::after {
+    animation: none;
+  }
+}
