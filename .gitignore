@@ -2,3 +2,4 @@
 .netlify
 # Local VScode folder
 .vscode/
+package-lock.json
