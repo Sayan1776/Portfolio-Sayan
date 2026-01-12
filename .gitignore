@@ -3,3 +3,4 @@
 # Local VScode folder
 .vscode/
 package-lock.json
+netlify.toml
