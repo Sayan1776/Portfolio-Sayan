@@ -2,7 +2,7 @@
 
 A modern, responsive developer portfolio built with vanilla HTML, CSS & JavaScript — featuring glassmorphism UI, smooth animations, and a dark-themed aesthetic.
 
-🔗 **Live:** [sayanpaul.netlify.app](https://sayanpaul.netlify.app)
+🔗 **Live:** [devsayan.me](https://devsayan.me)
 
 ---
 
