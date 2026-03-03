@@ -1217,6 +1217,32 @@
   font-family: var(--font-display);
 }
 
+.cert-title-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  position: relative;
+  transition: var(--transition-normal);
+}
+
+.cert-title-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), #fbbf24);
+  transition: var(--transition-normal);
+}
+
+.cert-title-link:hover {
+  color: var(--accent);
+}
+
+.cert-title-link:hover::after {
+  width: 100%;
+}
+
 .cert-issuer {
   color: var(--primary);
   font-size: 0.875rem;
