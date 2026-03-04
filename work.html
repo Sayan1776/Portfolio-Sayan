@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Skills, services, and featured projects by Sayan Paul — Data Science, Machine Learning, and Python development.">
+
+    <title>Work — Sayan Paul</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <!-- Noscript Fallback Nav -->
+    <noscript>
+        <div class="noscript-nav">
+            <span class="noscript-brand">Sayan Paul</span>
+            <nav>
+                <ul class="noscript-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="work.html">Work</a></li>
+                    <li><a href="journey.html">Journey</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </noscript>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Skills Orbital Section -->
+    <section id="skills" style="padding-top: var(--space-32);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label reveal">Expertise</span>
+                <h2 class="section-title reveal">Skills & Expertise</h2>
+                <p class="section-subtitle reveal">Orbital map of my technical ecosystem</p>
+            </div>
+
+            <div class="orbital-wrapper reveal">
+                <div class="orbital-container" id="orbital-container" aria-label="Orbital skills visualization">
+                    <canvas id="orbital-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label reveal">Services</span>
+                <h2 class="section-title reveal">What I Can Do</h2>
+                <p class="section-subtitle reveal">Comprehensive solutions for your digital requirements</p>
+            </div>
+
+            <div class="services-grid reveal">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-brain" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="service-title">Machine Learning Solutions</h3>
+                    <p class="service-description">
+                        Designing and training ML models for prediction, classification, and automation. Experienced in
+                        scikit-learn, pandas, and building end-to-end ML workflows.
+                    </p>
+                    <div class="service-features">
+                        <span class="feature-tag">Predictive Modeling</span>
+                        <span class="feature-tag">Python</span>
+                        <span class="feature-tag">ML Pipelines</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="service-title">Data Analytics & Visualization</h3>
+                    <p class="service-description">
+                        Turning raw datasets into clear, actionable insights using Python, pandas, and modern
+                        visualization tools. Ideal for dashboards, reports, and data understanding.
+                    </p>
+                    <div class="service-features">
+                        <span class="feature-tag">pandas</span>
+                        <span class="feature-tag">Data Visualization</span>
+                        <span class="feature-tag">Exploratory Analysis</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="service-title">Freelance Web-dev & DS/ML Projects</h3>
+                    <p class="service-description">
+                        Available for custom Web-dev & DS/ML projects. Delivering clean, production-ready solutions
+                        tailored to business goals.
+                    </p>
+                    <div class="service-features">
+                        <span class="feature-tag">Custom Web-dev & DS/ML Models</span>
+                        <span class="feature-tag">Consulting</span>
+                        <span class="feature-tag">End-to-End Systems</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section — Editorial List -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label reveal">Portfolio</span>
+                <h2 class="section-title reveal">Featured Projects</h2>
+                <p class="section-subtitle reveal">Selected work in data science and machine learning</p>
+            </div>
+
+            <div class="projects-list">
+                <div class="project-row reveal" data-title="IPL Match Outcome Predictor"
+                    data-category="AI / Machine Learning"
+                    data-description="A machine learning system that predicts IPL match winners using ball-by-ball data, historical performance patterns, and venue stats. Features single-match predictions and full tournament simulations through a Flask-powered interface."
+                    data-tech="AI-ML, Flask, Python, Scikit-learn, Pandas, Numpy" data-image="assets/IPL.png"
+                    data-github="https://github.com/Sayan1776/ipl-prediction-engine" data-demo="#">
+                    <div class="project-row-header">
+                        <h3 class="project-row-title">IPL Match Outcome Predictor</h3>
+                        <span class="project-row-year">2025</span>
+                        <span class="project-row-category">AI / ML</span>
+                    </div>
+                    <div class="project-row-details">
+                        <p class="project-row-description">
+                            A machine learning system that predicts IPL match winners using ball-by-ball data,
+                            historical performance patterns, and venue stats.
+                        </p>
+                        <div class="project-row-tech">
+                            <span class="tech-tag">AI-ML</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Scikit-learn</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-row reveal" data-title="Sapling Survival Analysis System"
+                    data-category="AI / COMPUTER VISION" data-description="A computer vision pipeline that estimates sapling survival rates using drone-based
+                            orthomosaic imagery. Aligns pre and post-weeding surveys, detects plantation pits,
+                            classifies survival status, and outputs GIS-ready reports with visual overlays for field
+                            verification." data-tech="AI-ML, Flask, Python, Scikit-learn, Pandas, Numpy"
+                    data-image="assets/Sapling_Monitor.png" data-github="https://github.com/Sayan1776/sapling_monitoring"
+                    data-demo="#">
+                    <div class="project-row-header">
+                        <h3 class="project-row-title">Sapling Survival Analysis System</h3>
+                        <span class="project-row-year">2026</span>
+                        <span class="project-row-category">AI / COMPUTER VISION</span>
+                    </div>
+                    <div class="project-row-details">
+                        <p class="project-row-description">
+                            A computer vision pipeline that estimates sapling survival rates using drone-based
+                            orthomosaic imagery. Aligns pre and post-weeding surveys, detects plantation pits,
+                            classifies survival status, and outputs GIS-ready reports with visual overlays for field
+                            verification.
+                        </p>
+                        <div class="project-row-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">OpenCV</span>
+                            <span class="tech-tag">Rasterio</span>
+                            <span class="tech-tag">NumPy</span>
+                            <span class="tech-tag">GIS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-row reveal" data-title="My Portfolio" data-category="Web-dev"
+                    data-description="A multi-page documentary-style portfolio built with vanilla HTML, CSS and JavaScript. Features a neural network skills visualization, anime.js powered entrance animations, editorial B&W design system, and a serverless contact form backend using Google Apps Script — zero hosting costs, zero dependencies."
+                    data-tech="AI-ML, Flask, Python, Scikit-learn, Pandas, Numpy" data-image="assets/Portfolio.png"
+                    data-github="https://github.com/Sayan1776/Portfolio-Sayan" data-demo="https://devsayan.me">
+                    <div class="project-row-header">
+                        <h3 class="project-row-title">My Portfolio</h3>
+                        <span class="project-row-year">2026</span>
+                        <span class="project-row-category">Web-dev</span>
+                    </div>
+                    <div class="project-row-details">
+                        <p class="project-row-description">
+                            A multi-page documentary-style portfolio built with vanilla HTML, CSS and JavaScript.
+                            Features a neural network skills visualization, anime.js powered entrance animations,
+                            editorial B&W design system, and a serverless contact form backend using Google Apps Script
+                            — zero hosting costs, zero dependencies.
+                        </p>
+                        <div class="project-row-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Anime.js</span>
+                            <span class="tech-tag">Google Apps Script</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-row reveal" data-title="SafeSpace — AI Safety Companion"
+                    data-category="AI / Fullstack"
+                    data-description="A real-time personal safety web app built with Next.js and Groq AI. Detects threatening language in chats, monitors distress audio, suggests safe zones based on frequent locations, and sends AI-generated context-aware emergency alerts with live location data — designed primarily to protect women and vulnerable users."
+                    data-tech="Next.js, Groq AI, TypeScript, React, Tailwind CSS, Vercel, AI SDK"
+                    data-image="assets/SafeSpace.png" data-github="https://github.com/Debraj1001/safespace-2-0"
+                    data-demo="">
+                    <div class="project-row-header">
+                        <h3 class="project-row-title">SafeSpace — AI Safety Companion</h3>
+                        <span class="project-row-year">2025</span>
+                        <span class="project-row-category">AI / Fullstack</span>
+                    </div>
+                    <div class="project-row-details">
+                        <p class="project-row-description">
+                            A real-time personal safety web app built with Next.js and Groq AI. Detects threatening
+                            language in chats, monitors distress audio, suggests safe zones based on frequent locations,
+                            and sends AI-generated context-aware emergency alerts with live location data — designed
+                            primarily to protect women and vulnerable users.
+                        </p>
+                        <div class="project-row-tech">
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">Groq AI</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Tailwind CSS</span>
+                            <span class="tech-tag">Vercel</span>
+                            <span class="tech-tag">AI SDK</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-row reveal" data-title="Kolkata Weather Forecast ML System"
+                    data-category="Machine Learning"
+                    data-description="A data-driven 7-day weather forecasting model for Kolkata using Random Forest regression. Combines historical climate data with live API inputs to predict temperature and humidity accurately, visualized through interactive charts."
+                    data-tech="Numpy, Scikit-learn, Jupyter Notebook, Pandas" data-image="assets/kolkata-weather.png"
+                    data-github="https://github.com/Sayan1776/ForecastML-Kolkata" data-demo="#">
+                    <div class="project-row-header">
+                        <h3 class="project-row-title">Kolkata Weather Forecast ML System</h3>
+                        <span class="project-row-year">2025</span>
+                        <span class="project-row-category">Machine Learning</span>
+                    </div>
+                    <div class="project-row-details">
+                        <p class="project-row-description">
+                            A data-driven 7-day weather forecasting model for Kolkata using Random Forest regression,
+                            combining historical climate data with live API inputs.
+                        </p>
+                        <div class="project-row-tech">
+                            <span class="tech-tag">Numpy</span>
+                            <span class="tech-tag">Scikit-learn</span>
+                            <span class="tech-tag">Pandas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-row reveal" data-title="Noelle — Personal AI Agent" data-category="AI Agent"
+                    data-description="A fully local AI assistant with web browsing, file analysis, semantic search, voice I/O, and a persistent persona — built from scratch to think with you, not for you."
+                    data-tech="Python, Ollama, Playwright, FAISS, Deepseek-R1" data-image="assets/noelle_logo.svg"
+                    data-github="https://github.com/Sayan1776/Noelle" data-demo="">
+                    <div class="project-row-header">
+                        <h3 class="project-row-title">Noelle — Personal AI Agent</h3>
+                        <span class="project-row-year">2025</span>
+                        <span class="project-row-category">AI Agent</span>
+                    </div>
+                    <div class="project-row-details">
+                        <p class="project-row-description">
+                            A fully local AI assistant with web browsing, file analysis, semantic search,
+                            voice I/O, and a persistent persona.
+                        </p>
+                        <div class="project-row-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Ollama</span>
+                            <span class="tech-tag">Playwright</span>
+                            <span class="tech-tag">FAISS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div class="project-modal-overlay">
+        <div class="project-modal">
+            <button class="modal-close" aria-label="Close project details">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+            <div class="modal-image">
+                <img src="" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="modal-body">
+                <div class="modal-badge"></div>
+                <h2 class="modal-title"></h2>
+                <p class="modal-description"></p>
+                <div class="modal-tech"></div>
+                <div class="modal-links"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <script src="node_modules/animejs/dist/bundles/anime.umd.min.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

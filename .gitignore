@@ -3,3 +3,5 @@
 # Local VScode folder
 .vscode/
 package-lock.json
+node_modules
+package.json
