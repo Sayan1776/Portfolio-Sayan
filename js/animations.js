@@ -9,17 +9,15 @@
 function initPageLoadAnimation() {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Fade body in
+    // Fade body in (body starts at opacity:0 from inline <style> in <head>)
     if (!prefersReduced && typeof anime !== 'undefined' && anime.animate) {
-        document.body.classList.add('loaded');
         anime.animate(document.body, {
             opacity: [0, 1],
-            duration: 600,
+            duration: 400,
             ease: 'outQuad'
         });
     } else {
         document.body.style.opacity = '1';
-        document.body.classList.add('loaded');
     }
 
     // Stagger hero title words
