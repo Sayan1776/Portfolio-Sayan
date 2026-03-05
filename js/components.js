@@ -86,15 +86,13 @@ function initPageTransitions() {
 
       e.preventDefault();
 
-      // Check if anime.js v4 is available
-      if (typeof anime !== 'undefined' && anime.animate) {
+      // Fade out with anime.js then navigate
+      if (typeof anime !== 'undefined') {
         anime.animate(document.body, {
-          opacity: 0,
+          opacity: [1, 0],
           duration: 300,
           easing: 'easeInQuad',
-          complete: function () {
-            window.location.href = href;
-          }
+          complete: () => { window.location.href = href; }
         });
       } else {
         window.location.href = href;

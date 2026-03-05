@@ -10,7 +10,7 @@ function initPageLoadAnimation() {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Fade body in (body starts at opacity:0 from inline <style> in <head>)
-    if (!prefersReduced && typeof anime !== 'undefined' && anime.animate) {
+    if (!prefersReduced && typeof anime !== 'undefined') {
         anime.animate(document.body, {
             opacity: 1,
             duration: 400,
@@ -22,7 +22,7 @@ function initPageLoadAnimation() {
 
     // Stagger hero title words
     const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle && !prefersReduced && typeof anime !== 'undefined' && anime.animate) {
+    if (heroTitle && !prefersReduced && typeof anime !== 'undefined') {
         const text = heroTitle.innerHTML;
         // Wrap each word in a span, preserving HTML tags like <span>
         const words = [];
@@ -54,7 +54,7 @@ function initPageLoadAnimation() {
             opacity: [0, 1],
             translateY: [30, 0],
             duration: 800,
-            delay: anime.stagger(120, { start: 400 }),
+            delay: anime.stagger(120, { startdelay: 400 }),
             easing: 'easeOutCubic'
         });
     }
@@ -76,7 +76,7 @@ function initScrollReveals() {
             if (entry.isIntersecting) {
                 const el = entry.target;
 
-                if (prefersReduced || typeof anime === 'undefined' || !anime.animate) {
+                if (prefersReduced || typeof anime === 'undefined') {
                     el.classList.add('visible');
                     el.style.opacity = '1';
                     el.style.transform = 'none';
@@ -172,7 +172,7 @@ function initProjectModal() {
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
 
-            if (typeof anime !== 'undefined' && anime.animate) {
+            if (typeof anime !== 'undefined') {
                 anime.animate(modal, {
                     translateY: ['100%', '0%'],
                     duration: 600,
@@ -184,7 +184,7 @@ function initProjectModal() {
 
     // Close modal
     function closeModal() {
-        if (typeof anime !== 'undefined' && anime.animate) {
+        if (typeof anime !== 'undefined') {
             anime.animate(modal, {
                 translateY: ['0%', '100%'],
                 duration: 400,
@@ -334,12 +334,12 @@ function initOrbitalSkills() {
     // --- "SP" center pulsing with anime.js ---
     const spPulseTarget = { opacity: 1 };
     function startSPPulse() {
-        if (typeof anime !== 'undefined' && anime.animate) {
+        if (typeof anime !== 'undefined') {
             anime.animate(spPulseTarget, {
                 opacity: [1, 0.6, 1],
                 duration: 3000,
                 easing: 'easeInOutSine',
-                loop: true,
+                loop: Infinity,
             });
         }
     }
