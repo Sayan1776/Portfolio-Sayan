@@ -12,9 +12,9 @@ function initPageLoadAnimation() {
     // Fade body in (body starts at opacity:0 from inline <style> in <head>)
     if (!prefersReduced && typeof anime !== 'undefined' && anime.animate) {
         anime.animate(document.body, {
-            opacity: [0, 1],
+            opacity: 1,
             duration: 400,
-            ease: 'outQuad'
+            easing: 'easeOutQuad'
         });
     } else {
         document.body.style.opacity = '1';
@@ -55,7 +55,7 @@ function initPageLoadAnimation() {
             translateY: [30, 0],
             duration: 800,
             delay: anime.stagger(120, { start: 400 }),
-            ease: 'outCubic'
+            easing: 'easeOutCubic'
         });
     }
 }
@@ -91,8 +91,8 @@ function initScrollReveals() {
                         translateY: [40, 0],
                         duration: 700,
                         delay: delay,
-                        ease: 'outCubic',
-                        onComplete: function () {
+                        easing: 'easeOutCubic',
+                        complete: function () {
                             el.classList.add('visible');
                         }
                     });
@@ -176,7 +176,7 @@ function initProjectModal() {
                 anime.animate(modal, {
                     translateY: ['100%', '0%'],
                     duration: 600,
-                    ease: 'outExpo'
+                    easing: 'easeOutExpo'
                 });
             }
         });
@@ -188,8 +188,8 @@ function initProjectModal() {
             anime.animate(modal, {
                 translateY: ['0%', '100%'],
                 duration: 400,
-                ease: 'inQuad',
-                onComplete: function () {
+                easing: 'easeInQuad',
+                complete: function () {
                     overlay.classList.remove('active');
                     document.body.style.overflow = '';
                 }
@@ -338,7 +338,7 @@ function initOrbitalSkills() {
             anime.animate(spPulseTarget, {
                 opacity: [1, 0.6, 1],
                 duration: 3000,
-                ease: 'inOutSine',
+                easing: 'easeInOutSine',
                 loop: true,
             });
         }

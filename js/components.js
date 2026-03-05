@@ -89,10 +89,10 @@ function initPageTransitions() {
       // Check if anime.js v4 is available
       if (typeof anime !== 'undefined' && anime.animate) {
         anime.animate(document.body, {
-          opacity: [1, 0],
+          opacity: 0,
           duration: 300,
-          ease: 'inQuad',
-          onComplete: function () {
+          easing: 'easeInQuad',
+          complete: function () {
             window.location.href = href;
           }
         });
