@@ -1,6 +1,6 @@
-# 🚀 Sayan Paul — Portfolio
+# 🎬 Sayan Paul — Portfolio
 
-A modern, responsive developer portfolio built with vanilla HTML, CSS & JavaScript — featuring glassmorphism UI, smooth animations, and a dark-themed aesthetic.
+A **Black & White Documentary** design portfolio built with vanilla HTML, CSS & JavaScript. High-contrast, typographically driven, and cinematic in feel — no frameworks, no build tools.
 
 🔗 **Live:** [devsayan.me](https://devsayan.me)
 
@@ -8,27 +8,32 @@ A modern, responsive developer portfolio built with vanilla HTML, CSS & JavaScri
 
 ## ✨ Features
 
-- **Responsive Design** — Fully optimized for desktop, tablet, and mobile
-- **Dark Glassmorphism UI** — Frosted-glass cards, glowing accents, and subtle gradients
-- **Smooth Animations** — Scroll-triggered fade-ins, 3D card tilts, and micro-interactions
-- **Modular CSS Architecture** — Organized into base, layout, components, animations, and responsive layers
-- **SEO Optimized** — Semantic HTML5, meta descriptions, proper heading hierarchy
-- **Accessible** — ARIA labels, keyboard navigation, and `prefers-reduced-motion` support
-- **Contact Form** — Integrated form with toast notifications
-- **Downloadable Resume** — One-click PDF download
+- **Black & White Documentary Aesthetic** — Pure monochrome palette, film grain overlay, editorial typography
+- **3-Panel Interactive Work Layout** — SVG skill network · Project grid with filter-by-skill · Sticky preview panel
+- **Cinematic Journey Timeline** — Alternating left/right cards with growing spine, diamond markers, and large year anchors
+- **Scroll-Triggered Animations** — IntersectionObserver reveals, parallax section titles, timeline spine growth
+- **Magnetic CTA Buttons** — Cursor-proximity attraction with inner-span parallax
+- **Ambient Ink Bleed Background** — Dual radial gradient keyed to scroll position and mouse X
+- **Declassified Cert Reveal** — White bar wipes away to reveal certification titles on scroll
+- **Section Chapter Labels** — Documentary-style `01 / SECTION` numbering via CSS data attributes
+- **Responsive Design** — Desktop 3-panel → Tablet 2-col → Mobile single-column
+- **Accessible** — ARIA labels, keyboard nav, `prefers-reduced-motion`, `hover: none` touch guards
+- **Contact Form** — Validated form with floating labels, Google Apps Script backend, and toast notifications
+- **Downloadable Resume** — One-click PDF
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer       | Technology                          |
-| ----------- | ----------------------------------- |
-| Structure   | HTML5 (Semantic)                    |
-| Styling     | Vanilla CSS (Custom Properties)     |
-| Interactivity | JavaScript (ES6+)               |
-| Fonts       | Google Fonts (Inter, Space Grotesk) |
-| Icons       | Font Awesome 6.4                    |
-| Hosting     | Netlify                             |
+| Layer | Technology |
+| ----------- | ------------------------------------ |
+| Structure | HTML5 (Semantic, 4-page MPA) |
+| Styling | Vanilla CSS (Custom Properties, 5-file modular architecture) |
+| Interactivity | JavaScript (ES6+, no framework) |
+| Animation | anime.js v4 (vendored) + CSS keyframes + IntersectionObserver |
+| Fonts | Playfair Display · IBM Plex Mono · Inter (Google Fonts) |
+| Icons | Font Awesome 6.4 |
+| Hosting | Netlify (static, zero build step) |
 
 ---
 
@@ -36,52 +41,71 @@ A modern, responsive developer portfolio built with vanilla HTML, CSS & JavaScri
 
 ```
 Portfolio-Sayan/
-├── index.html          # Main HTML document
-├── script.js           # Animations, nav, form handling & scroll logic
+├── index.html          # Home — hero + about
+├── work.html           # Work — 3-panel: skills SVG + project grid + preview
+├── journey.html        # Journey — cinematic timeline: education + certs + leadership
+├── contact.html        # Contact — contact cards + message form
 ├── css/
-│   ├── base.css        # CSS variables, resets & typography
-│   ├── layout.css      # Grid systems & section layouts
-│   ├── components.css  # Cards, buttons, badges & form styles
-│   ├── animations.css  # Keyframes & scroll-triggered transitions
-│   └── responsive.css  # Breakpoints & mobile adaptations
+│   ├── base.css        # Design tokens, reset, film grain, global utilities
+│   ├── layout.css      # Section layouts, workspace grid, timeline, preview panel
+│   ├── components.css  # Navbar, footer, buttons, form, shared UI
+│   ├── animations.css  # Keyframes + .reveal / .visible scroll-reveal states
+│   └── responsive.css  # All breakpoints and touch/motion overrides
+├── js/
+│   ├── anime.min.js    # anime.js v4 (vendored, ~18KB)
+│   ├── components.js   # Header/footer injection, nav, page transitions, particles
+│   ├── animations.js   # All animation functions (scroll, parallax, timeline, magnetic)
+│   └── main.js         # DOMContentLoaded init, page routing, skills network, preview panel
 ├── assets/
 │   ├── profile.webp    # Hero profile image
 │   ├── IPL.png         # IPL Predictor project screenshot
 │   ├── kolkata-weather.png  # Weather ML project screenshot
 │   └── resume.pdf      # Downloadable resume
+├── AI_CONTEXT.md       # Full architecture reference for AI assistants
+├── DESIGN_EXPERIMENTS.md  # 10 experimental UI concepts (4 implemented)
 └── README.md
 ```
 
 ---
 
-## 📌 Sections
+## 📌 Pages & Sections
 
-| Section               | Description                                              |
-| --------------------- | -------------------------------------------------------- |
-| **Hero**              | Intro, animated stats counter, social links & CTA        |
-| **About**             | Bio and technology grid                                  |
-| **Skills**            | Categorized skill cards (Expert / Proficient / Learning) |
-| **Services**          | ML Solutions, Data Analytics & Freelance offerings       |
-| **Projects**          | Featured project cards with GitHub & live demo links      |
-| **Education & Certs** | Timeline + 6 certification cards with linked titles      |
-| **Contact**           | Contact cards (email, LinkedIn, GitHub, phone, location) + form |
+| Page | Sections |
+| --------------- | --------------------------------------------------------------- |
+| **Home** | Hero (intro + animated stats) · About (dropcap + pull quote + tech stack) |
+| **Work** | Skills SVG Network · Services (3 cards) · Project Grid + Preview Panel |
+| **Journey** | Education Timeline (3 items) · Certifications Timeline (7 items) · Leadership Cards (6 items) |
+| **Contact** | Contact cards (email, LinkedIn, GitHub, WhatsApp, location) + form |
+
+---
+
+## 🎨 Design System
+
+The site uses a purpose-built **"Black & White Documentary Design System"**:
+
+- **Palette** — `#000000` / `#ffffff` + `rgba` greyscale. Only accent: `--accent-red: #ff3333` (used sparingly on hover)
+- **Typography** — Playfair Display (headings/display) · IBM Plex Mono (labels/code) · Inter (body/UI)
+- **Film grain** — Fixed `z-index: 9999` SVG noise overlay (`body::after`) at 4% opacity
+- **Ambient gradient** — `body::before` dual radial gradient tracks mouse X and scroll position
+- **Spacing** — `--space-1` (0.25rem) through `--space-32` (8rem), matching Tailwind's scale
+- **Borders** — Sharp editorial style. `--radius-sm: 2px`, `--radius-md: 4px`
 
 ---
 
 ## 🚀 Getting Started
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Sayan1776/Portfolio-Sayan.git
-   cd Portfolio-Sayan
-   ```
+```bash
+git clone https://github.com/Sayan1776/Portfolio-Sayan.git
+cd Portfolio-Sayan
 
-2. **Open locally** — just open `index.html` in your browser, or use a live server:
-   ```bash
-   npx serve .
-   ```
+# Open directly in browser (no build step needed)
+open index.html
 
-No build tools or dependencies required.
+# Or use a local server
+npx serve .
+```
+
+No dependencies to install. The only external resources are Google Fonts and Font Awesome loaded via CDN in the HTML.
 
 ---
 

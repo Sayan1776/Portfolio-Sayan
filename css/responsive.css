@@ -567,3 +567,365 @@
     background: transparent;
   }
 }
+
+/* ============================================
+   EXPERIMENT RESPONSIVE OVERRIDES
+   ============================================ */
+
+/* --- Exp 03: Dropcap — scale down on smaller screens --- */
+@media (max-width: 768px) {
+  .about-text .dropcap::first-letter {
+    font-size: 3.5rem;
+    padding-right: var(--space-2);
+  }
+
+  .about-pull-quote {
+    font-size: 1.15rem;
+    margin: var(--space-6) 0;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-text .dropcap::first-letter {
+    font-size: 3rem;
+    line-height: 0.75;
+  }
+
+  .about-pull-quote {
+    font-size: 1rem;
+    padding-left: var(--space-4);
+  }
+}
+
+/* --- Exp 04: Numbered Projects — hide ghost numeral and thumb on mobile --- */
+@media (max-width: 768px) {
+  /* Ghost numeral clutters small screens — hide it */
+  .project-row::before {
+    display: none;
+  }
+
+  /* Thumbnail requires hover — not useful on touch */
+  .project-row-thumb {
+    display: none;
+  }
+}
+
+/* --- Exp 04 + 09: Touch device overrides --- */
+@media (hover: none) {
+  /* No magnetic effect on touch; ensure no transform persists */
+  .btn-primary {
+    transform: none !important;
+  }
+
+  .btn-primary span {
+    transform: none !important;
+  }
+
+  /* No thumbnail peek on touch devices */
+  .project-row-thumb {
+    display: none;
+  }
+
+  /* Ghost numeral hover state should not apply */
+  .project-row::before {
+    opacity: 0.05 !important;
+    transform: translateY(-50%) translateX(0) !important;
+  }
+}
+
+/* --- Exp 10: Ink Bleed — disable on reduced motion (handled in JS, but belt-and-suspenders in CSS) --- */
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    display: none;
+  }
+}
+
+/* --- Exp 09: Magnetic Buttons — disable transform transition on reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary {
+    transition: background var(--transition-fast),
+                color var(--transition-fast),
+                border-color var(--transition-fast) !important;
+  }
+}
+
+/* ============================================
+   NEW VISUAL ENHANCEMENTS — Responsive Overrides
+   ============================================ */
+
+/* --- Section Chapter Numbers — hide on mobile (too cluttered) --- */
+@media (max-width: 768px) {
+  section[data-chapter]::after {
+    display: none;
+  }
+}
+
+/* --- Project Row Slide — disable on touch devices --- */
+@media (hover: none) {
+  .project-row:hover {
+    transform: none !important;
+  }
+
+  .project-row::after {
+    display: none;
+  }
+}
+
+/* --- Cinematic Parallax — disable on touch and small screens --- */
+@media (hover: none), (max-width: 768px) {
+  .section-title {
+    transform: none !important;
+    will-change: auto;
+  }
+}
+
+/* --- Journey Cinematic Timeline — mobile collapse to left spine --- */
+@media (max-width: 768px) {
+  .journey-timeline {
+    padding: 0 0 var(--space-8) var(--space-10);
+  }
+
+  /* Spine moves to left on mobile */
+  .journey-timeline::before {
+    left: 0;
+    transform: none;
+  }
+
+  /* All items stack single-column, full width */
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    justify-content: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Marker repositioned to left spine */
+  .timeline-marker,
+  .timeline-marker--sm {
+    left: calc(var(--space-10) * -1);
+    top: 10px;
+  }
+
+  /* Hide horizontal connectors on mobile */
+  .timeline-item:nth-child(odd)::after,
+  .timeline-item:nth-child(even)::after {
+    display: none;
+  }
+
+  .timeline-year {
+    font-size: 1.75rem;
+  }
+}
+
+/* --- Journey Timeline — reduced motion: show everything immediately --- */
+@media (prefers-reduced-motion: reduce) {
+  .journey-timeline::before {
+    height: 100% !important;
+    transition: none !important;
+  }
+
+  .timeline-marker,
+  .timeline-marker--sm {
+    border-color: var(--text-primary) !important;
+    background: var(--text-primary) !important;
+    transition: none !important;
+  }
+
+  .timeline-item:nth-child(odd)::after,
+  .timeline-item:nth-child(even)::after {
+    background: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Cert declassified bar — skip animation */
+  .cert-card-title-group h4::before {
+    display: none;
+  }
+}
+
+/* --- Cert Declassified Bar — reduced motion override --- */
+@media (prefers-reduced-motion: reduce) {
+  .project-row:hover {
+    transform: none !important;
+  }
+
+  .project-row::after {
+    display: none;
+  }
+}
+
+/* --- Leadership Document Grid — mobile single column --- */
+@media (max-width: 768px) {
+  .leadership-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Tablet: timeline cards closer to center --- */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .timeline-item:nth-child(odd) {
+    padding-right: calc(50% + 36px);
+  }
+
+  .timeline-item:nth-child(even) {
+    padding-left: calc(50% + 36px);
+  }
+}
+
+/* ============================================================
+   WORKSPACE LAYOUT — Responsive Rules (V3)
+   ============================================================ */
+
+/* Tablet (≤1100px): skills panel above, projects + preview side-by-side */
+@media (max-width: 1100px) {
+  .workspace-layout {
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: auto auto;
+    gap: var(--space-5);
+  }
+
+  /* Skills panel spans full width on top */
+  .skills-network-panel {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    position: static; /* unstick at tablet */
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .skills-network-panel .panel-header {
+    grid-column: 1 / -1;
+  }
+
+  .skills-svg-wrap {
+    padding: var(--space-3);
+    max-width: 280px;
+  }
+
+  .skills-legend {
+    grid-column: 2;
+    align-self: end;
+    border-top: none;
+    border-left: 1px solid var(--border-light);
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-5);
+  }
+
+  /* Projects panel fills left */
+  .projects-panel {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  /* Preview panel fills right */
+  .preview-panel {
+    grid-column: 2;
+    grid-row: 2;
+    position: sticky;
+    top: calc(60px + var(--space-5));
+    max-height: calc(100vh - 60px - var(--space-5) * 2);
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+/* Small tablet / large mobile (≤768px): single column */
+@media (max-width: 768px) {
+  .workspace-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: var(--space-5);
+  }
+
+  .skills-network-panel {
+    grid-column: 1;
+    grid-row: 1;
+    position: static;
+    display: block; /* reset tablet grid */
+  }
+
+  .skills-svg-wrap {
+    max-width: 260px;
+    margin: 0 auto;
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .skills-legend {
+    flex-direction: row;
+    justify-content: center;
+    border-top: 1px solid var(--border-light);
+    border-left: none;
+  }
+
+  .projects-panel {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    background: none;
+    gap: 1px;
+  }
+
+  .project-card:hover {
+    transform: none; /* disable lift on touch */
+  }
+
+  /* Preview panel inline below projects on mobile */
+  .preview-panel {
+    grid-column: 1;
+    grid-row: 3;
+    position: static;
+    max-height: none;
+  }
+}
+
+/* Touch devices: disable hover-only card lift */
+@media (hover: none) {
+  .project-card:hover {
+    background: rgba(255, 255, 255, 0.01);
+    transform: none;
+    z-index: auto;
+  }
+
+  .project-card:hover .project-card-img {
+    filter: grayscale(100%) brightness(0.7);
+    transform: none;
+  }
+
+  .skill-node:hover .skill-connector {
+    stroke: rgba(255, 255, 255, 0.08);
+  }
+
+  .skill-node:hover .skill-dot {
+    fill: rgba(255, 255, 255, 0.55);
+  }
+
+  .skill-node:hover .skill-label {
+    fill: rgba(255, 255, 255, 0.55);
+  }
+}
+
+/* Reduced motion: disable workspace transitions */
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .project-card-img,
+  .card-filtered-out {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .preview-content {
+    animation: none;
+  }
+
+  .active-filter-display {
+    animation: none;
+  }
+}
+

@@ -368,13 +368,17 @@ function initOrbitalSkills() {
             ctx.stroke();
         }
 
-        // Draw "SP" center
+        // Draw "SP" center — with glow that pulses with opacity
         spCenterOpacity = spPulseTarget.opacity;
+        ctx.save();
+        ctx.shadowBlur = 20 * spCenterOpacity;
+        ctx.shadowColor = `rgba(255,255,255,${0.35 * spCenterOpacity})`;
         ctx.font = '700 42px "Playfair Display", serif';
         ctx.fillStyle = `rgba(255,255,255,${spCenterOpacity})`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('SP', cx, cy);
+        ctx.restore();
 
         // Update and draw nodes
         for (let i = 0; i < nodes.length; i++) {
@@ -518,4 +522,179 @@ function initOrbitalSkills() {
     });
 }
 
+/**
+ * Ambient Ink Bleed — Scroll-driven radial gradient spotlight.
+ * Updates --scroll-offset and --spotlight-x CSS custom properties.
+ * body::before in base.css reads these to position a dual-gradient spotlight.
+ * --spotlight-x follows mouse position lazily at 0.1x rate for cinematic depth.
+ */
+function initScrollGradient() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let ticking = false;
+    let targetSpotlightX = 50; // target in %
+    let currentSpotlightX = 50;
+
+    // Scroll: update vertical offset
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const scrolled = window.scrollY;
+                const maxScroll = document.body.scrollHeight - window.innerHeight;
+                const pct = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
+                document.documentElement.style.setProperty(
+                    '--scroll-offset', `${20 + pct * 0.6}%`
+                );
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    // Mouse: lazily track horizontal cursor position for spotlight-x
+    // Only on pointer devices; skip on touch
+    if (!window.matchMedia('(hover: hover)').matches) return;
+
+    window.addEventListener('mousemove', (e) => {
+        targetSpotlightX = (e.clientX / window.innerWidth) * 100;
+    }, { passive: true });
+
+    // Smooth lerp loop for spotlight-x
+    function lerpSpotlight() {
+        currentSpotlightX += (targetSpotlightX - currentSpotlightX) * 0.06;
+        // Only update when meaningfully different
+        if (Math.abs(targetSpotlightX - currentSpotlightX) > 0.05) {
+            document.documentElement.style.setProperty(
+                '--spotlight-x', `${currentSpotlightX.toFixed(2)}%`
+            );
+        }
+        requestAnimationFrame(lerpSpotlight);
+    }
+    lerpSpotlight();
+}
+
+/**
+ * Timeline Reveal — lights up timeline dots and grows the vertical line
+ * as education timeline items scroll into view.
+ * Only runs on journey.html (checks for .education-timeline).
+ */
+function initTimelineReveal() {
+    const timelines = document.querySelectorAll('.journey-timeline');
+    if (!timelines.length) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Grow each spine when its container enters viewport
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('timeline-active');
+                timelineObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.05 });
+
+    timelines.forEach(t => timelineObserver.observe(t));
+
+    if (prefersReduced) {
+        timelines.forEach(t => t.classList.add('timeline-active'));
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.classList.add('timeline-lit');
+        });
+        return;
+    }
+
+    // Light up marker diamonds when items scroll into view
+    const itemObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('timeline-lit');
+                itemObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        itemObserver.observe(item);
+    });
+}
+
+/**
+ * Cinematic Parallax — subtle translateY drift on section headings (0.05x rate).
+ * Computed per element relative to viewport center, so each heading drifts
+ * independently as it enters and exits the viewport.
+ * Only applies to headings that are already visible (have .visible class)
+ * to avoid conflicting with the scroll-reveal animation.
+ * Skipped on touch devices and reduced-motion.
+ */
+function initParallax() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    const HEADING_RATE = 0.05;
+    const headings = document.querySelectorAll('.section-title');
+    if (headings.length === 0) return;
+
+    let ticking = false;
+
+    function updateParallax() {
+        const vc = window.innerHeight / 2;
+        headings.forEach(el => {
+            // Only shift headings that have been revealed — avoid transform conflicts
+            if (!el.classList.contains('visible')) return;
+            const rect = el.getBoundingClientRect();
+            const ec = rect.top + rect.height / 2;
+            const offset = (ec - vc) * HEADING_RATE;
+            el.style.transform = `translateY(${offset.toFixed(2)}px)`;
+        });
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }, { passive: true });
+}
+
+/**
+ * Magnetic CTA Buttons — proximity-based cursor attraction.
+ * Only activates on pointer/hover devices and when motion is allowed.
+ * Buttons translate toward the cursor when within MAGNETIC_RANGE px;
+ * the inner <span> moves at 50% rate for a parallax feel.
+ * Spring easing on .btn-primary (via CSS) handles the snap-back.
+ */
+function initMagneticButtons() {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const MAGNETIC_RANGE = 80;
+    const MAX_SHIFT = 10;
+    const buttons = document.querySelectorAll('.btn-primary');
+    if (buttons.length === 0) return;
+
+    document.addEventListener('mousemove', (e) => {
+        buttons.forEach(btn => {
+            const inner = btn.querySelector('span');
+            const rect = btn.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dx = e.clientX - cx;
+            const dy = e.clientY - cy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < MAGNETIC_RANGE) {
+                const strength = 1 - dist / MAGNETIC_RANGE;
+                const tx = dx * strength * (MAX_SHIFT / MAGNETIC_RANGE);
+                const ty = dy * strength * (MAX_SHIFT / MAGNETIC_RANGE);
+                btn.style.transform = `translate(${tx}px, ${ty}px)`;
+                if (inner) inner.style.transform = `translate(${tx * 0.5}px, ${ty * 0.5}px)`;
+            } else {
+                btn.style.transform = '';
+                if (inner) inner.style.transform = '';
+            }
+        });
+    }, { passive: true });
+}
 
