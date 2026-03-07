@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollGradient();
     initMagneticButtons();
     initParallax();
+    initCursorSpotlight();
 
     // Page-specific initialization
     const page = window.location.pathname.split('/').pop() || 'index.html';

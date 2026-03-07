@@ -698,3 +698,29 @@ function initMagneticButtons() {
     }, { passive: true });
 }
 
+/**
+ * Cursor Spotlight — Updates --mouse-x / --mouse-y CSS vars inside .glass-card
+ * elements to create a radial glow that follows the cursor.
+ * Only runs on hover-capable devices; disabled for prefers-reduced-motion.
+ */
+function initCursorSpotlight() {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const cards = document.querySelectorAll('.glass-card');
+    if (!cards.length) return;
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        }, { passive: true });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.setProperty('--mouse-x', '50%');
+            card.style.setProperty('--mouse-y', '50%');
+        }, { passive: true });
+    });
+}
+

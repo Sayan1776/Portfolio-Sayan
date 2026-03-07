@@ -14,6 +14,7 @@ A **Black & White Documentary** design portfolio built with vanilla HTML, CSS & 
 - **Scroll-Triggered Animations** — IntersectionObserver reveals, parallax section titles, timeline spine growth
 - **Magnetic CTA Buttons** — Cursor-proximity attraction with inner-span parallax
 - **Ambient Ink Bleed Background** — Dual radial gradient keyed to scroll position and mouse X
+- **Premium Glass Card Layer** — Reusable `.glass-card` class with `backdrop-filter` blur, soft shadow, and a cursor-following radial-gradient spotlight (JS `mousemove` → CSS vars `--mouse-x`/`--mouse-y`) applied to all card components
 - **Declassified Cert Reveal** — White bar wipes away to reveal certification titles on scroll
 - **Section Chapter Labels** — Documentary-style `01 / SECTION` numbering via CSS data attributes
 - **Responsive Design** — Desktop 3-panel → Tablet 2-col → Mobile single-column
@@ -62,7 +63,7 @@ Portfolio-Sayan/
 │   ├── kolkata-weather.png  # Weather ML project screenshot
 │   └── resume.pdf      # Downloadable resume
 ├── AI_CONTEXT.md       # Full architecture reference for AI assistants
-├── DESIGN_EXPERIMENTS.md  # 10 experimental UI concepts (4 implemented)
+├── DESIGN_EXPERIMENTS.md  # 11 experimental UI concepts (5 implemented)
 └── README.md
 ```
 
