@@ -963,3 +963,44 @@
   }
 }
 
+
+/* ============================================
+   AI CHAT WIDGET — Responsive
+   ============================================ */
+
+/* Small mobile — panel spans almost full width */
+@media (max-width: 480px) {
+  .chatbot-wrapper {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .chatbot-panel {
+    width: calc(100vw - 32px);
+  }
+}
+
+/* Touch devices — no scale on toggle */
+@media (hover: none) {
+  .chatbot-toggle:hover {
+    transform: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Reduced motion — disable panel slide + typing dots */
+@media (prefers-reduced-motion: reduce) {
+  .chatbot-panel {
+    transition: opacity 0.15s ease;
+    transform: none !important;
+  }
+
+  .chatbot-typing-dot {
+    animation: none;
+    opacity: 0.4;
+  }
+
+  .chatbot-msg {
+    animation: none;
+  }
+}

@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMagneticButtons();
     initParallax();
     initCursorSpotlight();
+    initPortfolioChatbot();
 
     // Page-specific initialization
     const page = window.location.pathname.split('/').pop() || 'index.html';
@@ -555,5 +556,192 @@ function initPreviewPanel() {
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && activeCard) closePreview();
+    });
+}
+
+
+/* ============================================
+   AI CHAT WIDGET — initPortfolioChatbot()
+   Injects the floating assistant widget into every page.
+   Structured for future API connection at POST /api/chat
+   ============================================ */
+function initPortfolioChatbot() {
+    // Build widget HTML
+    const widget = document.createElement('div');
+    widget.className = 'chatbot-wrapper';
+    widget.innerHTML = `
+        <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-modal="true" aria-label="AI Portfolio Assistant" aria-hidden="true">
+            <div class="chatbot-header">
+                <div class="chatbot-header-info">
+                    <span class="chatbot-header-dot" aria-hidden="true"></span>
+                    <span class="chatbot-header-title">Ask my AI assistant</span>
+                </div>
+                <button class="chatbot-close" id="chatbot-close" aria-label="Close chat assistant">✕</button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages" role="log" aria-live="polite" aria-label="Chat messages"></div>
+            <div class="chatbot-input-area">
+                <input
+                    class="chatbot-input"
+                    id="chatbot-input"
+                    type="text"
+                    placeholder="Ask about projects, skills..."
+                    aria-label="Type your message"
+                    autocomplete="off"
+                    maxlength="300"
+                />
+                <button class="chatbot-send" id="chatbot-send" aria-label="Send message">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                        <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <button class="chatbot-toggle" id="chatbot-toggle" aria-label="Open AI chat assistant" aria-expanded="false" aria-controls="chatbot-panel">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                <path d="M11 2C6.03 2 2 5.69 2 10.25c0 2.47 1.18 4.69 3.05 6.24L4 19l3.42-1.11C8.4 18.28 9.67 18.5 11 18.5c4.97 0 9-3.69 9-8.25S15.97 2 11 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="7.5" cy="10.25" r="1" fill="currentColor"/>
+                <circle cx="11" cy="10.25" r="1" fill="currentColor"/>
+                <circle cx="14.5" cy="10.25" r="1" fill="currentColor"/>
+            </svg>
+        </button>
+    `;
+    document.body.appendChild(widget);
+
+    // Elements
+    const panel = document.getElementById('chatbot-panel');
+    const toggle = document.getElementById('chatbot-toggle');
+    const closeBtn = document.getElementById('chatbot-close');
+    const messages = document.getElementById('chatbot-messages');
+    const input = document.getElementById('chatbot-input');
+    const sendBtn = document.getElementById('chatbot-send');
+
+    let isOpen = false;
+    let welcomeShown = false;
+
+    function scrollToBottom() {
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    function appendMessage(text, type) {
+        const msg = document.createElement('div');
+        msg.className = `chatbot-msg chatbot-msg--${type}`;
+        msg.textContent = text;
+        messages.appendChild(msg);
+        scrollToBottom();
+        return msg;
+    }
+
+    function showTyping() {
+        const typing = document.createElement('div');
+        typing.className = 'chatbot-typing';
+        typing.id = 'chatbot-typing';
+        typing.setAttribute('aria-label', 'Assistant is typing');
+        typing.innerHTML = `
+            <span class="chatbot-typing-dot" aria-hidden="true"></span>
+            <span class="chatbot-typing-dot" aria-hidden="true"></span>
+            <span class="chatbot-typing-dot" aria-hidden="true"></span>
+        `;
+        messages.appendChild(typing);
+        scrollToBottom();
+    }
+
+    function removeTyping() {
+        const typing = document.getElementById('chatbot-typing');
+        if (typing) typing.remove();
+    }
+
+    function sendMessage() {
+        const text = input.value.trim();
+        if (!text) return;
+
+        // Enforce client-side length cap (backend enforces 500 too)
+        if (text.length > 500) {
+            appendMessage('Message is too long. Please keep it under 500 characters.', 'ai');
+            return;
+        }
+
+        input.value = '';
+        sendBtn.disabled = true;
+        input.disabled = true;
+        appendMessage(text, 'user');
+        showTyping();
+
+        fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text }),
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    return res.json().then((d) => { throw new Error(d.error || 'Server error'); });
+                }
+                return res.json();
+            })
+            .then((data) => {
+                removeTyping();
+                appendMessage(data.reply || "Sorry, I didn't get a response. Please try again.", 'ai');
+            })
+            .catch((err) => {
+                removeTyping();
+                const msg = err.message && err.message.length < 120
+                    ? err.message
+                    : "I'm having trouble connecting right now. Please try again in a moment.";
+                appendMessage(msg, 'ai');
+            })
+            .finally(() => {
+                sendBtn.disabled = false;
+                input.disabled = false;
+                input.focus();
+            });
+    }
+
+    function openPanel() {
+        isOpen = true;
+        panel.classList.add('chatbot-panel--open');
+        panel.setAttribute('aria-hidden', 'false');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.classList.add('chatbot-toggle--active');
+
+        // Show welcome message on first open
+        if (!welcomeShown) {
+            welcomeShown = true;
+            setTimeout(() => {
+                appendMessage("Hi! I'm Sayan's AI assistant. Ask me about his projects, skills, or experience.", 'ai');
+            }, 300);
+        }
+
+        // Focus input after panel animates in
+        setTimeout(() => input.focus(), 250);
+    }
+
+    function closePanel() {
+        isOpen = false;
+        panel.classList.remove('chatbot-panel--open');
+        panel.setAttribute('aria-hidden', 'true');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.classList.remove('chatbot-toggle--active');
+        toggle.focus();
+    }
+
+    // Event listeners
+    toggle.addEventListener('click', () => {
+        if (isOpen) closePanel();
+        else openPanel();
+    });
+
+    closeBtn.addEventListener('click', closePanel);
+
+    sendBtn.addEventListener('click', sendMessage);
+
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) closePanel();
     });
 }

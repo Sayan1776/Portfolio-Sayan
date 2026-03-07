@@ -7,3 +7,6 @@ node_modules
 package.json
 AI_CONTEXT.md
 DESIGN_EXPERIMENTS.md
+# Environment variables — NEVER commit
+.env
+deno.lock
