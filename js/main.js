@@ -570,11 +570,11 @@ function initPortfolioChatbot() {
     const widget = document.createElement('div');
     widget.className = 'chatbot-wrapper';
     widget.innerHTML = `
-        <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-modal="true" aria-label="AI Portfolio Assistant" aria-hidden="true">
+        <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-modal="true" aria-label="NOVA Portfolio Assistant" aria-hidden="true">
             <div class="chatbot-header">
                 <div class="chatbot-header-info">
                     <span class="chatbot-header-dot" aria-hidden="true"></span>
-                    <span class="chatbot-header-title">Ask my AI assistant</span>
+                    <span class="chatbot-header-title">NOVA — Portfolio Assistant</span>
                 </div>
                 <button class="chatbot-close" id="chatbot-close" aria-label="Close chat assistant">✕</button>
             </div>
@@ -631,6 +631,16 @@ function initPortfolioChatbot() {
         return msg;
     }
 
+    function typeMessage(text, element, speed = 12) {
+        let i = 0;
+        const interval = setInterval(() => {
+            element.textContent += text[i];
+            i++;
+            scrollToBottom();
+            if (i >= text.length) clearInterval(interval);
+        }, speed);
+    }
+
     function showTyping() {
         const typing = document.createElement('div');
         typing.className = 'chatbot-typing';
@@ -679,7 +689,12 @@ function initPortfolioChatbot() {
             })
             .then((data) => {
                 removeTyping();
-                appendMessage(data.reply || "Sorry, I didn't get a response. Please try again.", 'ai');
+                const reply = data.reply || "Sorry, I didn't get a response. Please try again.";
+                const msg = document.createElement('div');
+                msg.className = 'chatbot-msg chatbot-msg--ai';
+                messages.appendChild(msg);
+                scrollToBottom();
+                typeMessage(reply, msg);
             })
             .catch((err) => {
                 removeTyping();
@@ -706,7 +721,7 @@ function initPortfolioChatbot() {
         if (!welcomeShown) {
             welcomeShown = true;
             setTimeout(() => {
-                appendMessage("Hi! I'm Sayan's AI assistant. Ask me about his projects, skills, or experience.", 'ai');
+                appendMessage("Hi! I'm NOVA, Sayan's portfolio assistant. Ask me about his projects, skills, or experience.", 'ai');
             }, 300);
         }
 

@@ -30,7 +30,12 @@ Guidelines:
 - For project links, share the GitHub URL from the data when available.
 - For contact, use the email or LinkedIn from the data.
 - Never invent information not present in the data above.
-- Respond in plain text (no markdown formatting).
+- Format responses clearly and concisely.
+- When answering about a specific project or topic, start with a short title line (e.g. "Project: IPL Winner Predictor").
+- Use short paragraphs of 2–3 sentences maximum each.
+- Use bullet points (starting with •) when listing items such as tech stack, skills, or features.
+- Avoid large single text blocks; break content into digestible sections.
+- Keep total response length concise (4–8 lines ideal).
 `;
 
 
@@ -53,7 +58,7 @@ async function callModel(message, apiKey) {
                 { role: "user", content: message }
             ],
             temperature: 0.6,
-            max_tokens: 200
+            max_tokens: 400
         })
     });
 

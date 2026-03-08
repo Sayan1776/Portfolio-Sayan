@@ -293,17 +293,22 @@ body.loaded {
 
 /* ---- Chat Panel ---- */
 .chatbot-panel {
-  width: 340px;
-  height: 420px;
+  width: 420px;
+  height: 560px;
   display: flex;
   flex-direction: column;
-  background: rgba(10, 10, 10, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    160deg,
+    rgba(20, 20, 22, 0.88) 0%,
+    rgba(10, 10, 12, 0.94) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7),
-              0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.55),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12),
+              inset 0 -1px 0 rgba(255, 255, 255, 0.05);
   overflow: hidden;
   /* Closed state */
   opacity: 0;
@@ -382,7 +387,7 @@ body.loaded {
 
 /* ---- Messages Area ---- */
 .chatbot-messages {
-  flex: 1;
+  height: calc(100% - 110px);
   overflow-y: auto;
   padding: var(--space-4) var(--space-5);
   display: flex;
@@ -406,19 +411,21 @@ body.loaded {
 
 /* Base message bubble */
 .chatbot-msg {
-  max-width: 85%;
+  max-width: 80%;
   padding: var(--space-3) var(--space-4);
   border-radius: 8px;
   font-family: var(--font-body);
   font-size: 0.78rem;
-  line-height: 1.65;
+  line-height: 1.5;
   animation: fadeInUp 0.2s ease;
 }
 
 /* AI message — left aligned */
 .chatbot-msg--ai {
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.035);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.07);
   color: var(--text-secondary);
 }
@@ -426,7 +433,9 @@ body.loaded {
 /* User message — right aligned */
 .chatbot-msg--user {
   align-self: flex-end;
-  background: rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--text-primary);
 }
