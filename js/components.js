@@ -21,8 +21,10 @@ function renderHeader() {
   ];
 
   const navLinks = pages.map(page => {
-    const isActive = currentPage === page.href ||
-      (currentPage === '' && page.href === 'index.html');
+    const pageName = page.href.replace('.html', '');
+    const isActive = currentPage === page.href || 
+                     currentPage === pageName ||
+                     (currentPage === '' && page.href === 'index.html');
     return `<li><a href="${page.href}" class="nav-link${isActive ? ' active' : ''}"${isActive ? ' aria-current="page"' : ''}>${page.label}</a></li>`;
   }).join('\n');
 

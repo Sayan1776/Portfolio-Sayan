@@ -22,20 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Page-specific initialization
     const page = window.location.pathname.split('/').pop() || 'index.html';
 
-    if (page === 'index.html' || page === '') {
+    if (page === 'index.html' || page === 'index' || page === '') {
         initCounterAnimations();
     }
 
-    if (page === 'work.html') {
+    if (page === 'work.html' || page === 'work') {
         initSkillsNetwork();
-        initPreviewPanel();
+        loadProjects();
     }
 
-    if (page === 'journey.html') {
+    if (page === 'journey.html' || page === 'journey') {
         initTimelineReveal();
     }
 
-    if (page === 'contact.html') {
+    if (page === 'contact.html' || page === 'contact') {
         initContactForm();
     }
 });
@@ -146,15 +146,25 @@ async function initContactForm() {
         submitBtn.style.opacity = '0.6';
 
         try {
-            const response = await fetch('https://script.google.com/macros/s/AKfycby7PREbqMicB4ywuhMIZdJgEKtp6RoPJ738OOH_uGo-pMvxlqvQJDToYb2ru2HoQ1DPuA/exec', {
+            formData.append("access_key", "f5dcf614-7815-461e-a647-406d27a4aa08");
+            
+            const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: formData,
             });
 
             if (response.ok) {
-                showToast("Message sent successfully! I'll get back to you soon.", 'success');
-                form.reset();
-                formGroups.forEach(group => group.classList.remove('focused'));
+                const responseData = await response.json();
+                if (responseData.success) {
+                    showToast("Message sent successfully! I'll get back to you soon.", 'success');
+                    form.reset();
+                    formGroups.forEach(group => group.classList.remove('focused'));
+                } else {
+                    showToast(responseData.message || 'Something went wrong. Please try again.', 'error');
+                }
             } else {
                 showToast('Something went wrong. Please try again.', 'error');
             }

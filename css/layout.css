@@ -1361,7 +1361,11 @@ section[data-chapter]::after {
   transition: all var(--transition-fast);
   text-decoration: none;
   border-radius: 8px;
+  /* Ensure taps reach buttons on touch devices */
+  pointer-events: auto;
+  touch-action: manipulation;
 }
+
 
 .btn:hover {
   border-color: var(--text-primary);
@@ -1389,6 +1393,14 @@ section[data-chapter]::after {
   justify-content: center;
 }
 
+/* Ensure primary hero buttons are tappable above overlays on mobile */
+.hero-actions .btn,
+.hero-actions .btn-primary {
+  position: relative;
+  z-index: 21000; /* above toast (20k) and chat (15k) */
+  -webkit-tap-highlight-color: rgba(0,0,0,0.0);
+}
+
 /* --- Toast --- */
 .toast {
   position: fixed;
@@ -1399,12 +1411,17 @@ section[data-chapter]::after {
   transform: translateY(120%);
   opacity: 0;
   transition: all var(--transition-normal);
+  /* Prevent hidden/offscreen toast from intercepting touch/clicks */
+  pointer-events: none;
 }
 
 .toast.show {
   transform: translateY(0);
   opacity: 1;
+  /* Allow interaction when visible */
+  pointer-events: auto;
 }
+
 
 .toast-content {
   display: flex;

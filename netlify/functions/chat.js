@@ -43,7 +43,28 @@ Guidelines:
 // GROQ API CALL
 // ================================
 
-async function callModel(message, apiKey) {
+
+// ================================
+// SUPABASE FETCH
+// ================================
+async function getProjectsFromSupabase() {
+    try {
+        const res = await fetch('https://qxgimcqpzfscflsbenyh.supabase.co/rest/v1/projects?select=*', {
+            headers: {
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4Z2ltY3FwemZzY2Zsc2JlbnloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0MTQxNDQsImV4cCI6MjEwMDk5MDE0NH0.m32fpKuVnQt9rihu1lG3jeDJonYHyPHGHhRHmCD42lk',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4Z2ltY3FwemZzY2Zsc2JlbnloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU0MTQxNDQsImV4cCI6MjEwMDk5MDE0NH0.m32fpKuVnQt9rihu1lG3jeDJonYHyPHGHhRHmCD42lk'
+            }
+        });
+        if (res.ok) {
+            return await res.json();
+        }
+    } catch (e) {
+        console.error('Supabase fetch error:', e);
+    }
+    return portfolioData.projects; // Fallback to local data
+}
+
+async function callModel(message, apiKey, prompt) {
 
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
@@ -52,9 +73,9 @@ async function callModel(message, apiKey) {
             "Authorization": `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-            model: "llama-3.1-8b-instant",
+            model: "openai/gpt-oss-120b",
             messages: [
-                { role: "system", content: SYSTEM_PROMPT },
+                { role: "system", content: prompt },
                 { role: "user", content: message }
             ],
             temperature: 0.6,
@@ -77,6 +98,12 @@ async function callModel(message, apiKey) {
 // ================================
 
 exports.handler = async (event) => {
+
+    // Fetch live projects from Supabase
+    const liveProjects = await getProjectsFromSupabase();
+    const dynamicPortfolioData = { ...portfolioData, projects: liveProjects };
+    const DYNAMIC_SYSTEM_PROMPT = SYSTEM_PROMPT.replace(JSON.stringify(portfolioData, null, 2), JSON.stringify(dynamicPortfolioData, null, 2));
+
 
     const corsHeaders = {
         'Access-Control-Allow-Origin': '*',
@@ -158,7 +185,7 @@ exports.handler = async (event) => {
 
     try {
 
-        const data = await callModel(sanitizedMessage, apiKey);
+        const data = await callModel(sanitizedMessage, apiKey, DYNAMIC_SYSTEM_PROMPT);
 
         reply = data.choices?.[0]?.message?.content?.trim();
 

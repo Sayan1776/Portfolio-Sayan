@@ -10,3 +10,4 @@ DESIGN_EXPERIMENTS.md
 # Environment variables — NEVER commit
 .env
 deno.lock
+VISUAL_AUDIT.md

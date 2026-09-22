@@ -125,6 +125,9 @@
 .footer {
   border-top: 1px solid var(--border-color);
   padding: var(--space-8) 0;
+  position: relative; /* ensure z-index applies */
+  z-index: 16001; /* sit above global overlays */
+  pointer-events: auto; /* ensure clicks reach footer */
 }
 
 .footer-inner {
@@ -152,6 +155,7 @@
   font-size: 0.875rem;
   color: var(--text-muted);
   transition: color var(--transition-fast);
+  pointer-events: auto; /* allow anchors to be clickable */
 }
 
 .footer-social a:hover {
