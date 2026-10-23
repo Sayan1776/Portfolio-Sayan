@@ -15,7 +15,7 @@ jobs:
           TIMESTAMP=$(date +%s)
           echo "Pinging Supabase at timestamp $TIMESTAMP..."
           RESPONSE=$(curl -sS --fail-with-body -w "\nHTTP_STATUS:%{http_code}\n" \
-            -X GET "https://qxgimcqpzfscflsbenyh.supabase.co/rest/v1/projects?select=id&limit=1&_ts=$TIMESTAMP" \
+            -X GET "https://hkxhfonfgqgdbkpwbtva.supabase.co/rest/v1/projects?select=id&limit=1&_ts=$TIMESTAMP" \
             -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
             -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
             -H "Cache-Control: no-cache, no-store, must-revalidate" \
