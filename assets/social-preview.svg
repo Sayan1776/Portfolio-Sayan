@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#faf9f0"/>
+  <path d="M0 92H1200" stroke="#c9d9d1"/>
+  <text x="56" y="62" fill="#0e1c26" font-family="Arial,sans-serif" font-size="25" font-weight="700" letter-spacing="-1.5">sayan paul<tspan fill="#f58216">.</tspan></text>
+  <text x="1080" y="62" fill="#5382a1" font-family="monospace" font-size="12" text-anchor="end" letter-spacing="2">JAVA / BUILD LOG</text>
+  <text x="60" y="170" fill="#5382a1" font-family="monospace" font-size="13" font-weight="700" letter-spacing="2">FIELD NOTES / KOLKATA</text>
+  <text x="35" y="390" fill="#0e1c26" font-family="Arial,sans-serif" font-size="242" font-weight="700" letter-spacing="-18">BUILDS<tspan fill="#f58216">.</tspan></text>
+  <rect x="662" y="166" width="477" height="286" fill="#142f3c"/>
+  <path d="M662 208H1139M704 166V452M746 166V452M788 166V452M830 166V452M872 166V452M914 166V452M956 166V452M998 166V452M1040 166V452M1082 166V452M662 250H1139M662 292H1139M662 334H1139M662 376H1139M662 418H1139" stroke="#d9e8ed" stroke-opacity=".09"/>
+  <circle cx="1024" cy="291" r="117" stroke="#5382a1" stroke-opacity=".55"/>
+  <circle cx="1024" cy="291" r="78" stroke="#f58216" stroke-opacity=".72"/>
+  <circle cx="1024" cy="291" r="8" fill="#f58216"/>
+  <path d="M662 374L800 317L893 355L1024 291" stroke="#f3dfc3" stroke-width="2" stroke-opacity=".75"/>
+  <rect x="700" y="483" width="439" height="52" fill="#e8f5e8"/>
+  <text x="718" y="516" fill="#0e1c26" font-family="monospace" font-size="12" font-weight="700" letter-spacing="1.6">THINK  →  BUILD  →  REFINE</text>
+  <text x="60" y="482" fill="#5d7075" font-family="Arial,sans-serif" font-size="24">Curious about the systems behind the screen.</text>
+  <path d="M60 544H1140" stroke="#c9d9d1"/>
+  <text x="60" y="587" fill="#f58216" font-family="monospace" font-size="12" font-weight="700" letter-spacing="1.5">JAVA · BACKEND · ECE</text>
+  <text x="1140" y="587" fill="#5382a1" font-family="monospace" font-size="12" text-anchor="end" letter-spacing="1.5">KOLKATA, INDIA</text>
+</svg>
